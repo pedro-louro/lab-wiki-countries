@@ -16,6 +16,10 @@ const CountryDetails = ({ countries }) => {
   }, [countryId, countries]);
   const style = { width: '30%' };
 
+  const codeToName = (code) => {
+    return countries.filter((country) => country.alpha3Code === code);
+  };
+
   return (
     <div>
       {!country && <h3>Country not found!</h3>}
@@ -43,7 +47,9 @@ const CountryDetails = ({ countries }) => {
                     {country[0].borders.map((border) => {
                       return (
                         <li>
-                          <Link to={`/countries/${border}`}>{border}</Link>
+                          <Link to={`/countries/${border}`}>
+                            {codeToName(border)[0].name.official}
+                          </Link>
                         </li>
                       );
                     })}
