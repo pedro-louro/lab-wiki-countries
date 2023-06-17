@@ -7,17 +7,18 @@ const CountryDetails = ({ countries }) => {
   const { countryId } = useParams();
 
   useEffect(() => {
-    const countryDetails = countries.filter(
+    const countryDetails = countries.find(
       (country) => country.alpha3Code === countryId
     );
     if (countryDetails) {
       setCountry(countryDetails);
     }
   }, [countryId, countries]);
+
   const style = { width: '30%' };
 
   const codeToName = (code) => {
-    return countries.filter((country) => country.alpha3Code === code);
+    return countries.find((country) => country.alpha3Code === code);
   };
 
   return (
@@ -25,18 +26,18 @@ const CountryDetails = ({ countries }) => {
       {!country && <h3>Country not found!</h3>}
       {country && (
         <div className="col-7">
-          <h1>{country[0].name.official}</h1>
+          <h1>{country.name.official}</h1>
           <table className="table">
             <thead></thead>
             <tbody>
               <tr>
                 <td style={{ style }}>Capital</td>
-                <td>{country[0].capital}</td>
+                <td>{country.capital}</td>
               </tr>
               <tr>
                 <td>Area</td>
                 <td>
-                  {country[0].area} km
+                  {country.area} km
                   <sup>2</sup>
                 </td>
               </tr>
@@ -44,15 +45,15 @@ const CountryDetails = ({ countries }) => {
                 <td>Borders</td>
                 <td>
                   <ul style={{ listStyleType: 'none' }}>
-                    {!country[0].borders.length && (
+                    {!country.borders.length && (
                       <li>This country has no borders!</li>
                     )}
-                    {country[0].borders.map((border) => {
+                    {country.borders.map((border) => {
                       return (
-                        <li>
+                        <li key={border}>
                           {border && (
                             <Link to={`/countries/${border}`}>
-                              {codeToName(border)[0].name.official}
+                              {codeToName(border).name.official}
                             </Link>
                           )}
                         </li>
