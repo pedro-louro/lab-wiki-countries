@@ -14,7 +14,7 @@ const CountriesList = ({ countries }) => {
               src={`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`}
               alt="country flag"
             />
-            {country.name.official}
+            <p>{country.name.official}</p>
           </Link>
         );
       })}

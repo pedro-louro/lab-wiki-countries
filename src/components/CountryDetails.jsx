@@ -44,12 +44,17 @@ const CountryDetails = ({ countries }) => {
                 <td>Borders</td>
                 <td>
                   <ul style={{ listStyleType: 'none' }}>
+                    {!country[0].borders.length && (
+                      <li>This country has no borders!</li>
+                    )}
                     {country[0].borders.map((border) => {
                       return (
                         <li>
-                          <Link to={`/countries/${border}`}>
-                            {codeToName(border)[0].name.official}
-                          </Link>
+                          {border && (
+                            <Link to={`/countries/${border}`}>
+                              {codeToName(border)[0].name.official}
+                            </Link>
+                          )}
                         </li>
                       );
                     })}
